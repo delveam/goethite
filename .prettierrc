@@ -1,0 +1,11 @@
+{
+	"useTabs": true,
+	"overrides": [
+		{
+			"files": "package.json, package-lock.json",
+			"options": {
+				"useTabs": false
+			}
+		}
+	]
+}
