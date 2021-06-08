@@ -5,7 +5,7 @@ on:
     types: [created]
 
 jobs:
-  build:
+  package:
     runs-on: ubuntu-latest 
     permissions: 
       contents: read
@@ -15,7 +15,7 @@ jobs:
       # Setup .npmrc file to publish to GitHub Packages
       - uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: '16.x'
           registry-url: 'https://npm.pkg.github.com'
       - run: npm install
       - run: npm publish
