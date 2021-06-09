@@ -1,12 +1,14 @@
-// Yoinked from: https://stackoverflow.com/a/4673436
-function stringFormat(format: string, ...args: string[]): string {
-	return format.replace(/\{(\d+)\}/g, (substring, index) => {
+// eslint-disable-next-line -- `args` must be of any type to mimic Rust's macro system.
+export function format(formatString: string, ...args: any[]): string {
+	// Yoinked from: https://stackoverflow.com/a/4673436
+	return formatString.replace(/\{(\d+)\}/g, (substring, index) => {
 		return typeof args[index] !== "undefined" ? args[index] : substring;
 	});
 }
 
-export function println(format: string, ...args: string[]): void {
-	console.log(stringFormat(format, ...args));
+// eslint-disable-next-line -- `args` must be of any type to mimic Rust's macro system.
+export function println(message: string, ...args: any[]): void {
+	console.log(format(message, ...args));
 }
 
 export function assert(expression: boolean, errorMessage?: string): void {
