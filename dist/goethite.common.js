@@ -2,14 +2,16 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 
-// Yoinked from: https://stackoverflow.com/a/4673436
-function stringFormat(format, ...args) {
-	return format.replace(/\{(\d+)\}/g, (substring, index) => {
+// eslint-disable-next-line -- `args` must be of any type to mimic Rust's macro system.
+function format(formatString, ...args) {
+	// Yoinked from: https://stackoverflow.com/a/4673436
+	return formatString.replace(/\{(\d+)\}/g, (substring, index) => {
 		return typeof args[index] !== "undefined" ? args[index] : substring;
 	});
 }
-function println(format, ...args) {
-	console.log(stringFormat(format, ...args));
+// eslint-disable-next-line -- `args` must be of any type to mimic Rust's macro system.
+function println(message, ...args) {
+	console.log(format(message, ...args));
 }
 function assert(expression, errorMessage) {
 	if (!expression) {

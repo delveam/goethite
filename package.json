@@ -1,6 +1,6 @@
 {
 	"name": "@delveam/goethite",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "JavaScript meets Rust",
 	"main": "./dist/goethite.js",
 	"module": "./dist/goethite.esm.js",
