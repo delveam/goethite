@@ -29,11 +29,19 @@ const db = new Map();
 db.set(345, { name: "Lewis" });
 db.set(119, { name: "Marine" });
 
-export function getUserById(id) {
+function getUserById(id) {
   if (!db.has(id)) {
     return err("Could not find user in database.");
   }
 
   return ok(db.get(id));
 }
+
+const user = getUserById(345);
+
+if (user.isOk()) {
+  console.log(`${user.unwrap().name}, I found your shorts!`);
+}
+
+// Output: "Lewis, I found your shorts!"
 ```
