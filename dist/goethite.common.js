@@ -2,14 +2,12 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 
-// eslint-disable-next-line -- `args` must be of any type to mimic Rust's macro system.
 function format(formatString, ...args) {
 	// Yoinked from: https://stackoverflow.com/a/4673436
 	return formatString.replace(/\{(\d+)\}/g, (substring, index) => {
 		return typeof args[index] !== "undefined" ? args[index] : substring;
 	});
 }
-// eslint-disable-next-line -- `args` must be of any type to mimic Rust's macro system.
 function println(message, ...args) {
 	console.log(format(message, ...args));
 }
@@ -380,6 +378,7 @@ exports.Option = Option;
 exports.Result = Result;
 exports.assert = assert;
 exports.err = err;
+exports.format = format;
 exports.none = none;
 exports.ok = ok;
 exports.println = println;

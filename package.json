@@ -1,13 +1,13 @@
 {
 	"name": "@delveam/goethite",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "JavaScript meets Rust",
 	"main": "./dist/goethite.js",
 	"module": "./dist/goethite.esm.js",
 	"types": "./types/index.d.ts",
 	"files": [
 		"dist",
-    "deno",
+		"deno",
 		"types"
 	],
 	"scripts": {
