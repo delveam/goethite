@@ -1,13 +1,13 @@
-// eslint-disable-next-line -- `args` must be of any type to mimic Rust's macro system.
-export function format(formatString: string, ...args: any[]): string {
+export function format(formatString: string, ...args: unknown[]): string {
 	// Yoinked from: https://stackoverflow.com/a/4673436
 	return formatString.replace(/\{(\d+)\}/g, (substring, index) => {
-		return typeof args[index] !== "undefined" ? args[index] : substring;
+		return typeof args[index] !== "undefined"
+			? (args[index] as string)
+			: substring;
 	});
 }
 
-// eslint-disable-next-line -- `args` must be of any type to mimic Rust's macro system.
-export function println(message: string, ...args: any[]): void {
+export function println(message: string, ...args: unknown[]): void {
 	console.log(format(message, ...args));
 }
 
