@@ -246,25 +246,13 @@ class Result {
 			case 0 /* Ok */:
 				return __classPrivateFieldGet(this, _Result_contents, "f");
 			case 1 /* Err */:
-				throw new TypeError(
-					`${errorMessage}: ${__classPrivateFieldGet(
-						this,
-						_Result_contents,
-						"f"
-					)}`
-				);
+				throw new TypeError(`${errorMessage}`);
 		}
 	}
 	expectErr(errorMessage) {
 		switch (__classPrivateFieldGet(this, _Result_meta, "f")) {
 			case 0 /* Ok */:
-				throw new TypeError(
-					`${errorMessage}: ${__classPrivateFieldGet(
-						this,
-						_Result_contents,
-						"f"
-					)}`
-				);
+				throw new TypeError(`${errorMessage}`);
 			case 1 /* Err */:
 				return __classPrivateFieldGet(this, _Result_contents, "f");
 		}
@@ -274,17 +262,13 @@ class Result {
 			case 0 /* Ok */:
 				return __classPrivateFieldGet(this, _Result_contents, "f");
 			case 1 /* Err */:
-				throw new Error(
-					`${__classPrivateFieldGet(this, _Result_contents, "f")}`
-				);
+				throw new TypeError("Attempted to call `unwrap` on an `Err` value.");
 		}
 	}
 	unwrapErr() {
 		switch (__classPrivateFieldGet(this, _Result_meta, "f")) {
 			case 0 /* Ok */:
-				throw new Error(
-					`${__classPrivateFieldGet(this, _Result_contents, "f")}`
-				);
+				throw new TypeError("Attempted to call `unwrapErr` on an `Ok` value.");
 			case 1 /* Err */:
 				return __classPrivateFieldGet(this, _Result_contents, "f");
 		}
