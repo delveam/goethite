@@ -25,14 +25,14 @@ export default class Result<T, E> {
 			case ResultType.Ok:
 				return this.#contents as T;
 			case ResultType.Err:
-				throw new TypeError(`${errorMessage}: ${this.#contents}`);
+				throw new TypeError(`${errorMessage}`);
 		}
 	}
 
 	public expectErr(errorMessage: string): E {
 		switch (this.#meta) {
 			case ResultType.Ok:
-				throw new TypeError(`${errorMessage}: ${this.#contents}`);
+				throw new TypeError(`${errorMessage}`);
 			case ResultType.Err:
 				return this.#contents as E;
 		}
@@ -43,14 +43,14 @@ export default class Result<T, E> {
 			case ResultType.Ok:
 				return this.#contents as T;
 			case ResultType.Err:
-				throw new Error(`${this.#contents}`);
+				throw new TypeError("Attempted to call `unwrap` on an `Err` value.");
 		}
 	}
 
 	public unwrapErr(): E {
 		switch (this.#meta) {
 			case ResultType.Ok:
-				throw new Error(`${this.#contents}`);
+				throw new TypeError("Attempted to call `unwrapErr` on an `Ok` value.");
 			case ResultType.Err:
 				return this.#contents as E;
 		}
