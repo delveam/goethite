@@ -1,0 +1,15 @@
+{
+	"include": ["src/**/*"],
+	"compilerOptions": {
+		"rootDir": "src",
+		"target": "ES2017",
+		"module": "ES2015",
+		"moduleResolution": "node",
+		"declaration": true,
+		"declarationDir": "types",
+		"noEmitOnError": true,
+		"strict": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true
+	}
+}
