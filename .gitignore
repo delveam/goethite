@@ -1,4 +1,3 @@
-node_modules
-build
-tmp
 .eslintcache
+node_modules
+tmp

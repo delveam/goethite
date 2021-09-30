@@ -1,0 +1,4 @@
+dist/goethite.min.cjs
+dist/goethite.min.mjs
+node_modules
+tmp
