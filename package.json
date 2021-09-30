@@ -15,11 +15,11 @@
 		"format:dist": "prettier -w dist/goethite.common.js dist/goethite.esm.js dist/goethite.js",
 		"format:misc": "prettier -w .eslintrc.json .prettierrc rollup.config.js package.json src/tsconfig.json",
 		"format": "npm run format:src && npm run format:dist && npm run format:misc",
-		"lint": "eslint --max-warnings 0 src/** --ext .ts",
 		"build": "rimraf build && tsc -b src",
 		"dist": "rimraf dist && rollup -c rollup.config.js && npm run format:dist",
 		"make:build": "tsc -b src",
 		"make:dist": "rollup -c rollup.config.js",
+		"lint": "prettier --ignore-path .gitignore -c . && eslint --max-warnings 0 src/** --ext .ts",
 		"prepare": "husky install"
 	},
 	"repository": {
