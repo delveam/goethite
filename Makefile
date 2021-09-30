@@ -24,7 +24,7 @@ build/index.js: $(SOURCES) | build
 	if [ -d "build" ]; then rm -rf build; fi
 	npm run make:build
 
-dist/goethite.js: build/index.js | dist
+dist/goethite.mjs: build/index.js | dist
 	if [ -d "dist" ]; then rm -rf dist; fi
 	npm run make:dist
 	npm run format:dist
@@ -48,5 +48,5 @@ lint:
 debug: build/index.js
 	@echo Done
 
-release: dist/goethite.js $(DENO_MODULE_SOURCES)
+release: dist/goethite.mjs $(DENO_MODULE_SOURCES)
 	@echo Done

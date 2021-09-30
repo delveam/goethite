@@ -2,14 +2,18 @@
 	"name": "@delveam/goethite",
 	"version": "0.1.3",
 	"description": "JavaScript meets Rust",
-	"main": "./dist/goethite.js",
-	"module": "./dist/goethite.esm.js",
-	"types": "./types/index.d.ts",
+	"type": "module",
+	"main": "./dist/goethite.cjs",
 	"files": [
 		"dist",
 		"deno",
 		"types"
 	],
+	"exports": {
+		"import": "./dist/goethite.mjs",
+		"require": "./dist/goethite.cjs"
+	},
+	"types": "./types/index.d.ts",
 	"scripts": {
 		"format:src": "prettier -w src/**/*.ts",
 		"format:dist": "prettier -w dist/goethite.common.js dist/goethite.esm.js dist/goethite.js",

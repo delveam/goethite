@@ -5,32 +5,21 @@ export default [
 		input: "./build/index.js",
 		output: [
 			{
-				format: "umd",
-				name: "Goethite",
-				file: `dist/goethite.js`,
-			},
-			{
-				format: "umd",
-				name: "Goethite",
-				file: "dist/goethite.min.js",
-				plugins: [terser()],
+				format: "cjs",
+				file: "dist/goethite.cjs",
 			},
 			{
 				format: "cjs",
-				file: "dist/goethite.common.js",
-			},
-			{
-				format: "cjs",
-				file: "dist/goethite.common.min.js",
+				file: "dist/goethite.min.cjs",
 				plugins: [terser()],
 			},
 			{
 				format: "es",
-				file: "dist/goethite.esm.js",
+				file: "dist/goethite.mjs",
 			},
 			{
 				format: "es",
-				file: "dist/goethite.esm.min.js",
+				file: "dist/goethite.min.mjs",
 				plugins: [terser()],
 			},
 		],
