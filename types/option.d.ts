@@ -11,6 +11,7 @@ export default class Option<T> {
 	mapOr<U>(fallbackValue: U, onSuccess: (value: T) => U): U;
 	mapOrElse<U>(onError: () => U, onSuccess: (value: T) => U): U;
 	andThen<U>(onSuccess: (value: T) => Option<U>): Option<U>;
+	filter(predicate: (value: T) => boolean): Option<T>;
 	eq(other: Option<T>): boolean;
 	toString(): string;
 	static some<T>(value: T): Option<T>;

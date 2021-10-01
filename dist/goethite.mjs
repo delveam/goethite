@@ -90,68 +90,99 @@ class Option {
 	}
 	expect(errorMessage) {
 		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
-			case 0 /* Some */:
+			case 0 /* Some */: {
 				return __classPrivateFieldGet(this, _Option_contents, "f");
-			case 1 /* None */:
+			}
+			case 1 /* None */: {
 				throw new TypeError(errorMessage);
+			}
 		}
 	}
 	unwrap() {
 		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
-			case 0 /* Some */:
+			case 0 /* Some */: {
 				return __classPrivateFieldGet(this, _Option_contents, "f");
-			case 1 /* None */:
+			}
+			case 1 /* None */: {
 				throw new TypeError("Attempted to unwrap 'None' value.");
+			}
 		}
 	}
 	unwrapOr(fallbackValue) {
 		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
-			case 0 /* Some */:
+			case 0 /* Some */: {
 				return __classPrivateFieldGet(this, _Option_contents, "f");
-			case 1 /* None */:
+			}
+			case 1 /* None */: {
 				return fallbackValue;
+			}
 		}
 	}
 	unwrapOrElse(onError) {
 		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
-			case 0 /* Some */:
+			case 0 /* Some */: {
 				return __classPrivateFieldGet(this, _Option_contents, "f");
-			case 1 /* None */:
+			}
+			case 1 /* None */: {
 				return onError();
+			}
 		}
 	}
 	map(onSuccess) {
 		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
-			case 0 /* Some */:
+			case 0 /* Some */: {
 				return Option.some(
 					onSuccess(__classPrivateFieldGet(this, _Option_contents, "f"))
 				);
-			case 1 /* None */:
+			}
+			case 1 /* None */: {
 				return Option.none();
+			}
 		}
 	}
 	mapOr(fallbackValue, onSuccess) {
 		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
-			case 0 /* Some */:
+			case 0 /* Some */: {
 				return onSuccess(__classPrivateFieldGet(this, _Option_contents, "f"));
-			case 1 /* None */:
+			}
+			case 1 /* None */: {
 				return fallbackValue;
+			}
 		}
 	}
 	mapOrElse(onError, onSuccess) {
 		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
-			case 0 /* Some */:
+			case 0 /* Some */: {
 				return onSuccess(__classPrivateFieldGet(this, _Option_contents, "f"));
-			case 1 /* None */:
+			}
+			case 1 /* None */: {
 				return onError();
+			}
 		}
 	}
 	andThen(onSuccess) {
 		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
-			case 0 /* Some */:
+			case 0 /* Some */: {
 				return onSuccess(__classPrivateFieldGet(this, _Option_contents, "f"));
-			case 1 /* None */:
+			}
+			case 1 /* None */: {
 				return Option.none();
+			}
+		}
+	}
+	filter(predicate) {
+		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
+			case 0 /* Some */: {
+				if (predicate(__classPrivateFieldGet(this, _Option_contents, "f"))) {
+					return Option.some(
+						__classPrivateFieldGet(this, _Option_contents, "f")
+					);
+				}
+				return Option.none();
+			}
+			case 1 /* None */: {
+				return Option.none();
+			}
 		}
 	}
 	eq(other) {
@@ -164,12 +195,14 @@ class Option {
 	}
 	toString() {
 		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
-			case 0 /* Some */:
+			case 0 /* Some */: {
 				return `Some(${JSON.stringify(
 					__classPrivateFieldGet(this, _Option_contents, "f")
 				)})`;
-			case 1 /* None */:
+			}
+			case 1 /* None */: {
 				return `None`;
+			}
 		}
 	}
 	static some(value) {
@@ -208,84 +241,104 @@ class Result {
 	}
 	expect(errorMessage) {
 		switch (__classPrivateFieldGet(this, _Result_meta, "f")) {
-			case 0 /* Ok */:
+			case 0 /* Ok */: {
 				return __classPrivateFieldGet(this, _Result_contents, "f");
-			case 1 /* Err */:
+			}
+			case 1 /* Err */: {
 				throw new TypeError(`${errorMessage}`);
+			}
 		}
 	}
 	expectErr(errorMessage) {
 		switch (__classPrivateFieldGet(this, _Result_meta, "f")) {
-			case 0 /* Ok */:
+			case 0 /* Ok */: {
 				throw new TypeError(`${errorMessage}`);
-			case 1 /* Err */:
+			}
+			case 1 /* Err */: {
 				return __classPrivateFieldGet(this, _Result_contents, "f");
+			}
 		}
 	}
 	unwrap() {
 		switch (__classPrivateFieldGet(this, _Result_meta, "f")) {
-			case 0 /* Ok */:
+			case 0 /* Ok */: {
 				return __classPrivateFieldGet(this, _Result_contents, "f");
-			case 1 /* Err */:
+			}
+			case 1 /* Err */: {
 				throw new TypeError("Attempted to call `unwrap` on an `Err` value.");
+			}
 		}
 	}
 	unwrapErr() {
 		switch (__classPrivateFieldGet(this, _Result_meta, "f")) {
-			case 0 /* Ok */:
+			case 0 /* Ok */: {
 				throw new TypeError("Attempted to call `unwrapErr` on an `Ok` value.");
-			case 1 /* Err */:
+			}
+			case 1 /* Err */: {
 				return __classPrivateFieldGet(this, _Result_contents, "f");
+			}
 		}
 	}
 	unwrapOr(fallbackValue) {
 		switch (__classPrivateFieldGet(this, _Result_meta, "f")) {
-			case 0 /* Ok */:
+			case 0 /* Ok */: {
 				return __classPrivateFieldGet(this, _Result_contents, "f");
-			case 1 /* Err */:
+			}
+			case 1 /* Err */: {
 				return fallbackValue;
+			}
 		}
 	}
 	unwrapOrElse(onError) {
 		switch (__classPrivateFieldGet(this, _Result_meta, "f")) {
-			case 0 /* Ok */:
+			case 0 /* Ok */: {
 				return __classPrivateFieldGet(this, _Result_contents, "f");
-			case 1 /* Err */:
+			}
+			case 1 /* Err */: {
 				return onError();
+			}
 		}
 	}
 	map(onSuccess) {
 		switch (__classPrivateFieldGet(this, _Result_meta, "f")) {
-			case 0 /* Ok */:
+			case 0 /* Ok */: {
 				return Result.ok(
 					onSuccess(__classPrivateFieldGet(this, _Result_contents, "f"))
 				);
-			case 1 /* Err */:
+			}
+			case 1 /* Err */: {
 				return Result.err(__classPrivateFieldGet(this, _Result_contents, "f"));
+			}
 		}
 	}
 	mapOr(fallbackValue, onSuccess) {
 		switch (__classPrivateFieldGet(this, _Result_meta, "f")) {
-			case 0 /* Ok */:
+			case 0 /* Ok */: {
 				return onSuccess(__classPrivateFieldGet(this, _Result_contents, "f"));
-			case 1 /* Err */:
+			}
+			case 1 /* Err */: {
 				return fallbackValue;
+			}
 		}
 	}
 	mapOrElse(onError, onSuccess) {
 		switch (__classPrivateFieldGet(this, _Result_meta, "f")) {
-			case 0 /* Ok */:
+			case 0 /* Ok */: {
 				return onSuccess(__classPrivateFieldGet(this, _Result_contents, "f"));
-			case 1 /* Err */:
+			}
+			case 1 /* Err */: {
 				return onError(__classPrivateFieldGet(this, _Result_contents, "f"));
+			}
 		}
 	}
 	andThen(onSuccess) {
 		switch (__classPrivateFieldGet(this, _Result_meta, "f")) {
-			case 0 /* Ok */:
+			case 0 /* Ok */: {
 				return onSuccess(__classPrivateFieldGet(this, _Result_contents, "f"));
-			case 1 /* Err */:
+			}
+			case 1 /* Err */: {
 				return Result.err(__classPrivateFieldGet(this, _Result_contents, "f"));
+			}
 		}
 	}
 	eq(other) {
@@ -298,14 +351,16 @@ class Result {
 	}
 	toString() {
 		switch (__classPrivateFieldGet(this, _Result_meta, "f")) {
-			case 0 /* Ok */:
+			case 0 /* Ok */: {
 				return `Ok(${JSON.stringify(
 					__classPrivateFieldGet(this, _Result_contents, "f")
 				)})`;
-			case 1 /* Err */:
+			}
+			case 1 /* Err */: {
 				return `Err(${JSON.stringify(
 					__classPrivateFieldGet(this, _Result_contents, "f")
 				)})`;
+			}
 		}
 	}
 	static ok(value) {

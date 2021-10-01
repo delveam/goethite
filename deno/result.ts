@@ -22,91 +22,111 @@ export default class Result<T, E> {
 
 	public expect(errorMessage: string): T {
 		switch (this.#meta) {
-			case ResultType.Ok:
+			case ResultType.Ok: {
 				return this.#contents as T;
-			case ResultType.Err:
+			}
+			case ResultType.Err: {
 				throw new TypeError(`${errorMessage}`);
+			}
 		}
 	}
 
 	public expectErr(errorMessage: string): E {
 		switch (this.#meta) {
-			case ResultType.Ok:
+			case ResultType.Ok: {
 				throw new TypeError(`${errorMessage}`);
-			case ResultType.Err:
+			}
+			case ResultType.Err: {
 				return this.#contents as E;
+			}
 		}
 	}
 
 	public unwrap(): T {
 		switch (this.#meta) {
-			case ResultType.Ok:
+			case ResultType.Ok: {
 				return this.#contents as T;
-			case ResultType.Err:
+			}
+			case ResultType.Err: {
 				throw new TypeError("Attempted to call `unwrap` on an `Err` value.");
+			}
 		}
 	}
 
 	public unwrapErr(): E {
 		switch (this.#meta) {
-			case ResultType.Ok:
+			case ResultType.Ok: {
 				throw new TypeError("Attempted to call `unwrapErr` on an `Ok` value.");
-			case ResultType.Err:
+			}
+			case ResultType.Err: {
 				return this.#contents as E;
+			}
 		}
 	}
 
 	public unwrapOr(fallbackValue: T): T {
 		switch (this.#meta) {
-			case ResultType.Ok:
+			case ResultType.Ok: {
 				return this.#contents as T;
-			case ResultType.Err:
+			}
+			case ResultType.Err: {
 				return fallbackValue;
+			}
 		}
 	}
 
 	public unwrapOrElse(onError: () => T): T {
 		switch (this.#meta) {
-			case ResultType.Ok:
+			case ResultType.Ok: {
 				return this.#contents as T;
-			case ResultType.Err:
+			}
+			case ResultType.Err: {
 				return onError();
+			}
 		}
 	}
 
 	public map<U>(onSuccess: (value: T) => U): Result<U, E> {
 		switch (this.#meta) {
-			case ResultType.Ok:
+			case ResultType.Ok: {
 				return Result.ok<U, E>(onSuccess(this.#contents as T));
-			case ResultType.Err:
+			}
+			case ResultType.Err: {
 				return Result.err<U, E>(this.#contents as E);
+			}
 		}
 	}
 
 	public mapOr<U>(fallbackValue: U, onSuccess: (value: T) => U): U {
 		switch (this.#meta) {
-			case ResultType.Ok:
+			case ResultType.Ok: {
 				return onSuccess(this.#contents as T);
-			case ResultType.Err:
+			}
+			case ResultType.Err: {
 				return fallbackValue;
+			}
 		}
 	}
 
 	public mapOrElse<U>(onError: (error: E) => U, onSuccess: (value: T) => U): U {
 		switch (this.#meta) {
-			case ResultType.Ok:
+			case ResultType.Ok: {
 				return onSuccess(this.#contents as T);
-			case ResultType.Err:
+			}
+			case ResultType.Err: {
 				return onError(this.#contents as E);
+			}
 		}
 	}
 
 	public andThen<U>(onSuccess: (value: T) => Result<U, E>): Result<U, E> {
 		switch (this.#meta) {
-			case ResultType.Ok:
+			case ResultType.Ok: {
 				return onSuccess(this.#contents as T);
-			case ResultType.Err:
+			}
+			case ResultType.Err: {
 				return Result.err<U, E>(this.#contents as E);
+			}
 		}
 	}
 
@@ -116,10 +136,12 @@ export default class Result<T, E> {
 
 	public toString(): string {
 		switch (this.#meta) {
-			case ResultType.Ok:
+			case ResultType.Ok: {
 				return `Ok(${JSON.stringify(this.#contents)})`;
-			case ResultType.Err:
+			}
+			case ResultType.Err: {
 				return `Err(${JSON.stringify(this.#contents)})`;
+			}
 		}
 	}
 
