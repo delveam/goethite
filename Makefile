@@ -2,51 +2,38 @@ SOURCES := $(shell find src -name "*.ts")
 
 DENO_MODULE_SOURCES := $(patsubst src/%.ts, deno/%.ts, $(SOURCES))
 
-.PHONY: clean debug format lint release
-
 $(VERBOSE).SILENT:
 
-all: clean release
-
-build:
-	mkdir $@
-
-dist:
-	mkdir $@
-
-types:
-	mkdir $@
+.PHONY: all
+all: clean release format
+	@echo Done
 
 deno:
 	mkdir $@
 
-build/index.js: $(SOURCES) | build
-	if [ -d "build" ]; then rm -rf build; fi
-	npm run make:build
-
-dist/goethite.mjs: build/index.js | dist
-	if [ -d "dist" ]; then rm -rf dist; fi
-	npm run make:dist
-	npm run format:dist
+dist/goethite.mjs: $(SOURCES)
+	npm run build
+	sh scripts/move_types.sh
 
 $(DENO_MODULE_SOURCES): deno/%.ts: src/%.ts | deno
 	sh scripts/deno_handshake.sh $@ $^
 
+.PHONY: clean
 clean:
-	if [ -d "build" ]; then rm -rf build; fi
-	if [ -d "dist" ]; then rm -rf dist; fi
 	if [ -d "deno" ]; then rm -rf deno; fi
+	if [ -d "dist" ]; then rm -rf dist; fi
 	if [ -d "types" ]; then rm -rf types; fi
 	@echo Done
 
+.PHONY: release
+release: dist/goethite.mjs $(DENO_MODULE_SOURCES)
+	@echo Done
+
+.PHONY: format
 format:
 	npm run format
 
+.PHONY: lint
 lint:
 	npm run lint
 
-debug: build/index.js
-	@echo Done
-
-release: dist/goethite.mjs $(DENO_MODULE_SOURCES)
-	@echo Done
