@@ -92,6 +92,21 @@ export default class Option<T> {
 		}
 	}
 
+	public filter(predicate: (value: T) => boolean): Option<T> {
+		switch (this.#meta) {
+			case OptionType.Some: {
+				if (predicate(this.#contents as T)) {
+					return Option.some<T>(this.#contents as T);
+				}
+
+				return Option.none<T>();
+			}
+			case OptionType.None: {
+				return Option.none<T>();
+			}
+		}
+	}
+
 	public eq(other: Option<T>): boolean {
 		return this.#meta === other.#meta && this.#contents === other.#contents;
 	}
