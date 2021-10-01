@@ -21,143 +21,156 @@ function assert(expression, errorMessage) {
 	}
 }
 
-var __classPrivateFieldSet$1 =
-	(undefined && undefined.__classPrivateFieldSet) ||
-	function (receiver, state, value, kind, f) {
-		if (kind === "m") throw new TypeError("Private method is not writable");
-		if (kind === "a" && !f)
-			throw new TypeError("Private accessor was defined without a setter");
-		if (
-			typeof state === "function"
-				? receiver !== state || !f
-				: !state.has(receiver)
-		)
-			throw new TypeError(
-				"Cannot write private member to an object whose class did not declare it"
-			);
-		return (
-			kind === "a"
-				? f.call(receiver, value)
-				: f
-				? (f.value = value)
-				: state.set(receiver, value),
-			value
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+
+function __classPrivateFieldGet(receiver, state, kind, f) {
+	if (kind === "a" && !f)
+		throw new TypeError("Private accessor was defined without a getter");
+	if (
+		typeof state === "function"
+			? receiver !== state || !f
+			: !state.has(receiver)
+	)
+		throw new TypeError(
+			"Cannot read private member from an object whose class did not declare it"
 		);
-	};
-var __classPrivateFieldGet$1 =
-	(undefined && undefined.__classPrivateFieldGet) ||
-	function (receiver, state, kind, f) {
-		if (kind === "a" && !f)
-			throw new TypeError("Private accessor was defined without a getter");
-		if (
-			typeof state === "function"
-				? receiver !== state || !f
-				: !state.has(receiver)
-		)
-			throw new TypeError(
-				"Cannot read private member from an object whose class did not declare it"
-			);
-		return kind === "m"
-			? f
-			: kind === "a"
-			? f.call(receiver)
+	return kind === "m"
+		? f
+		: kind === "a"
+		? f.call(receiver)
+		: f
+		? f.value
+		: state.get(receiver);
+}
+
+function __classPrivateFieldSet(receiver, state, value, kind, f) {
+	if (kind === "m") throw new TypeError("Private method is not writable");
+	if (kind === "a" && !f)
+		throw new TypeError("Private accessor was defined without a setter");
+	if (
+		typeof state === "function"
+			? receiver !== state || !f
+			: !state.has(receiver)
+	)
+		throw new TypeError(
+			"Cannot write private member to an object whose class did not declare it"
+		);
+	return (
+		kind === "a"
+			? f.call(receiver, value)
 			: f
-			? f.value
-			: state.get(receiver);
-	};
+			? (f.value = value)
+			: state.set(receiver, value),
+		value
+	);
+}
+
 var _Option_meta, _Option_contents;
 class Option {
 	constructor(meta, contents) {
 		_Option_meta.set(this, void 0);
 		_Option_contents.set(this, void 0);
-		__classPrivateFieldSet$1(this, _Option_meta, meta, "f");
-		__classPrivateFieldSet$1(this, _Option_contents, contents, "f");
+		__classPrivateFieldSet(this, _Option_meta, meta, "f");
+		__classPrivateFieldSet(this, _Option_contents, contents, "f");
 	}
 	isSome() {
-		return __classPrivateFieldGet$1(this, _Option_meta, "f") == 0 /* Some */;
+		return __classPrivateFieldGet(this, _Option_meta, "f") == 0 /* Some */;
 	}
 	isNone() {
-		return __classPrivateFieldGet$1(this, _Option_meta, "f") == 1 /* None */;
+		return __classPrivateFieldGet(this, _Option_meta, "f") == 1 /* None */;
 	}
 	expect(errorMessage) {
-		switch (__classPrivateFieldGet$1(this, _Option_meta, "f")) {
+		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
 			case 0 /* Some */:
-				return __classPrivateFieldGet$1(this, _Option_contents, "f");
+				return __classPrivateFieldGet(this, _Option_contents, "f");
 			case 1 /* None */:
 				throw new TypeError(errorMessage);
 		}
 	}
 	unwrap() {
-		switch (__classPrivateFieldGet$1(this, _Option_meta, "f")) {
+		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
 			case 0 /* Some */:
-				return __classPrivateFieldGet$1(this, _Option_contents, "f");
+				return __classPrivateFieldGet(this, _Option_contents, "f");
 			case 1 /* None */:
 				throw new TypeError("Attempted to unwrap 'None' value.");
 		}
 	}
 	unwrapOr(fallbackValue) {
-		switch (__classPrivateFieldGet$1(this, _Option_meta, "f")) {
+		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
 			case 0 /* Some */:
-				return __classPrivateFieldGet$1(this, _Option_contents, "f");
+				return __classPrivateFieldGet(this, _Option_contents, "f");
 			case 1 /* None */:
 				return fallbackValue;
 		}
 	}
 	unwrapOrElse(onError) {
-		switch (__classPrivateFieldGet$1(this, _Option_meta, "f")) {
+		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
 			case 0 /* Some */:
-				return __classPrivateFieldGet$1(this, _Option_contents, "f");
+				return __classPrivateFieldGet(this, _Option_contents, "f");
 			case 1 /* None */:
 				return onError();
 		}
 	}
 	map(onSuccess) {
-		switch (__classPrivateFieldGet$1(this, _Option_meta, "f")) {
+		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
 			case 0 /* Some */:
 				return Option.some(
-					onSuccess(__classPrivateFieldGet$1(this, _Option_contents, "f"))
+					onSuccess(__classPrivateFieldGet(this, _Option_contents, "f"))
 				);
 			case 1 /* None */:
 				return Option.none();
 		}
 	}
 	mapOr(fallbackValue, onSuccess) {
-		switch (__classPrivateFieldGet$1(this, _Option_meta, "f")) {
+		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
 			case 0 /* Some */:
-				return onSuccess(__classPrivateFieldGet$1(this, _Option_contents, "f"));
+				return onSuccess(__classPrivateFieldGet(this, _Option_contents, "f"));
 			case 1 /* None */:
 				return fallbackValue;
 		}
 	}
 	mapOrElse(onError, onSuccess) {
-		switch (__classPrivateFieldGet$1(this, _Option_meta, "f")) {
+		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
 			case 0 /* Some */:
-				return onSuccess(__classPrivateFieldGet$1(this, _Option_contents, "f"));
+				return onSuccess(__classPrivateFieldGet(this, _Option_contents, "f"));
 			case 1 /* None */:
 				return onError();
 		}
 	}
 	andThen(onSuccess) {
-		switch (__classPrivateFieldGet$1(this, _Option_meta, "f")) {
+		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
 			case 0 /* Some */:
-				return onSuccess(__classPrivateFieldGet$1(this, _Option_contents, "f"));
+				return onSuccess(__classPrivateFieldGet(this, _Option_contents, "f"));
 			case 1 /* None */:
 				return Option.none();
 		}
 	}
 	eq(other) {
 		return (
-			__classPrivateFieldGet$1(this, _Option_meta, "f") ===
-				__classPrivateFieldGet$1(other, _Option_meta, "f") &&
-			__classPrivateFieldGet$1(this, _Option_contents, "f") ===
-				__classPrivateFieldGet$1(other, _Option_contents, "f")
+			__classPrivateFieldGet(this, _Option_meta, "f") ===
+				__classPrivateFieldGet(other, _Option_meta, "f") &&
+			__classPrivateFieldGet(this, _Option_contents, "f") ===
+				__classPrivateFieldGet(other, _Option_contents, "f")
 		);
 	}
 	toString() {
-		switch (__classPrivateFieldGet$1(this, _Option_meta, "f")) {
+		switch (__classPrivateFieldGet(this, _Option_meta, "f")) {
 			case 0 /* Some */:
 				return `Some(${JSON.stringify(
-					__classPrivateFieldGet$1(this, _Option_contents, "f")
+					__classPrivateFieldGet(this, _Option_contents, "f")
 				)})`;
 			case 1 /* None */:
 				return `None`;
@@ -183,50 +196,6 @@ function none() {
 	return Option.none();
 }
 
-var __classPrivateFieldSet =
-	(undefined && undefined.__classPrivateFieldSet) ||
-	function (receiver, state, value, kind, f) {
-		if (kind === "m") throw new TypeError("Private method is not writable");
-		if (kind === "a" && !f)
-			throw new TypeError("Private accessor was defined without a setter");
-		if (
-			typeof state === "function"
-				? receiver !== state || !f
-				: !state.has(receiver)
-		)
-			throw new TypeError(
-				"Cannot write private member to an object whose class did not declare it"
-			);
-		return (
-			kind === "a"
-				? f.call(receiver, value)
-				: f
-				? (f.value = value)
-				: state.set(receiver, value),
-			value
-		);
-	};
-var __classPrivateFieldGet =
-	(undefined && undefined.__classPrivateFieldGet) ||
-	function (receiver, state, kind, f) {
-		if (kind === "a" && !f)
-			throw new TypeError("Private accessor was defined without a getter");
-		if (
-			typeof state === "function"
-				? receiver !== state || !f
-				: !state.has(receiver)
-		)
-			throw new TypeError(
-				"Cannot read private member from an object whose class did not declare it"
-			);
-		return kind === "m"
-			? f
-			: kind === "a"
-			? f.call(receiver)
-			: f
-			? f.value
-			: state.get(receiver);
-	};
 var _Result_meta, _Result_contents;
 class Result {
 	constructor(meta, contents) {

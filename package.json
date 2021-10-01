@@ -1,6 +1,6 @@
 {
 	"name": "@delveam/goethite",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"description": "JavaScript meets Rust",
 	"type": "module",
 	"main": "./dist/goethite.cjs",
@@ -25,7 +25,8 @@
 		"url": "git+https://github.com/delveam/goethite.git"
 	},
 	"keywords": [
-		"Rust"
+		"monad",
+		"rust"
 	],
 	"author": "Marvin Valenzuela",
 	"license": "MIT",
